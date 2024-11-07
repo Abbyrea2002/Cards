@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  * Created by abbyr on 07/11/2024
@@ -6,25 +7,57 @@ import java.util.Arrays;
  */
 public class Sort
 {
+   public static int numComparisons = 0, numSwaps = 0;
    public static void bubbleSort(int[] arr){
-      int lastPos = arr.length - 1;
-      int innerLastPos = lastPos;
-      int temp;
-      for(int i = 0; i<lastPos; i++){
-         for(int j = 0; j<innerLastPos; j++){
+
+      int firstPos = 0, lastPos = arr.length - 1;
+      int temp, lastSwapPos;
+
+
+      while(firstPos < lastPos){
+         lastSwapPos = firstPos;
+         for(int j = firstPos; j<lastPos; j++){
+            numComparisons++;
             if(arr[j] > arr[j+1]){
-               temp = arr[i];
+               temp = arr[j];
                arr[j] =arr[j+1];
                arr[j+1] = temp;
+               numSwaps++;
+               lastSwapPos = j;
             }
          }
-         innerLastPos--;
+         lastPos = lastSwapPos;
+         //System.out.println("Pass : " + Arrays.toString(arr));
       }
    }
 
+   public static int[] randomArray(int n){
+      Random rand = new Random();
+      int[] arr = new int[n];
+
+      for(int i = 0; i<n; i++){
+         arr[i] = rand.nextInt(100);
+      }
+      return arr;
+   }
+
    public static void main(String[] args){
-      int[] arr = {9, 6, 3, 2, 5, 3, 10, 8, 1, 7, 4};
-      bubbleSort(arr);
-      System.out.println(Arrays.toString(arr));
+
+      int[] arr;
+      long startTime, endTime;
+      int[] arraySizes = {100, 200, 400, 800, 1600, 3200, 6400};
+
+      for(int arraySize : arraySizes){
+         startTime = System.currentTimeMillis();
+         for(int i=0; i<1000; i++){
+            arr = randomArray(arraySize);
+            bubbleSort(arr);
+
+         }
+         endTime = System.currentTimeMillis();
+
+         System.out.println(arraySize + "\t " + (endTime - startTime));
+      }
+
    }
 }//class

@@ -6,14 +6,17 @@ import java.util.Random;
  */
 public class Card implements Comparable<Card>
 {
-   private final int RANK, SUIT;
+   private final int RANK, SUIT, COLOUR;
+
    private static final Random GENERATOR = new Random();
    private static final String[] RANKS = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace" };
    private static final String[] SUITS = {"Clubs", "Diamonds", "Hearts", "Spades"};
+   private static final String[] COLOURS = {"Red", "Black"};
 
    public Card(){
       RANK = GENERATOR.nextInt(RANKS.length);
       SUIT = GENERATOR.nextInt(SUITS.length);
+      COLOUR = GENERATOR.nextInt(COLOURS.length);
 
    }
 
@@ -27,9 +30,15 @@ public class Card implements Comparable<Card>
 
    }
 
+   public String getColour(){
+      return COLOURS[COLOUR];
+   }
+
    public int getRankValue(){
       return RANK;
    }
+
+
 
    @Override
    public String toString(){

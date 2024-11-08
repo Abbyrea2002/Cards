@@ -14,7 +14,7 @@ public class Snap
          myCards[i] = new Card();
          System.out.println(myCards[i]);
 
-         if(i > 0 && myCards.getRankValue().equals(myCards[i-1])){
+         if(i > 0 && Objects.equals(myCards[i].getRankValue(), myCards[i-1].getRankValue())){
             System.out.println("Snap");
             numSnaps++;
          }

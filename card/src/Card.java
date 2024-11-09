@@ -8,6 +8,9 @@ public class Card implements Comparable<Card>
 {
    private final int RANK, SUIT, COLOUR;
 
+
+
+
    private static final Random GENERATOR = new Random();
    private static final String[] RANKS = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace" };
    private static final String[] SUITS = {"Clubs", "Diamonds", "Hearts", "Spades"};
@@ -16,7 +19,8 @@ public class Card implements Comparable<Card>
    public Card(){
       RANK = GENERATOR.nextInt(RANKS.length);
       SUIT = GENERATOR.nextInt(SUITS.length);
-      COLOUR = GENERATOR.nextInt(COLOURS.length);
+      COLOUR = (SUIT == 1 || SUIT == 2) ? 0 : 1;
+
 
    }
 
@@ -37,6 +41,8 @@ public class Card implements Comparable<Card>
    public int getRankValue(){
       return RANK;
    }
+
+
 
 
 

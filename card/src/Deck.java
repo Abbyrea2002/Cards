@@ -22,7 +22,7 @@ public class Deck
       int index;
       Card temp;
       Random random = new Random();
-      for(int i = this.CARDS.length - 1; i > 0; i++){
+      for(int i = this.CARDS.length - 1; i > 0; i--){
          index = random.nextInt(i + 1);
          temp = this.CARDS[index];
          this.CARDS[index] = this.CARDS[i];
@@ -35,13 +35,5 @@ public class Deck
       return this.CARDS[this.cardIndex--];
    }
 
-   public static void main(String[] args){
-      Deck deck = new Deck();
 
-      for(int i=0; i<NUMCARDS; i++){
-         System.out.println(deck.deal());
-      }
-
-
-   }
 }//class

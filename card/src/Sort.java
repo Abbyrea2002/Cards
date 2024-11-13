@@ -127,50 +127,72 @@ public class Sort
       }
 
    }
+
+   private static void shellSort(int[] arr){
+      int temp, index;
+
+      for(int gap = arr.length / 2; gap>0; gap/=2){
+         System.out.println("\nGap is " + gap);
+         for(int i = gap; i<arr.length; i++){
+            temp = arr[i];
+            numComparisons++;
+            for(index = i; index >+ gap && arr[index - gap] > temp;index -= gap){
+               arr[index] = arr[index - gap];
+               numUpdates++;
+               numComparisons++;
+            }
+            arr[index] = temp;
+            numUpdates++;
+            System.out.println("Pass:" + Arrays.toString(arr));
+         }
+      }
+
+   }
    public static void main(String[] args){
-//      //int[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-//      int[] arr = {5, 9, 1, 10, 3, 8, 2, 4, 7, 6};
-//      System.out.println("Before:" + Arrays.toString(arr));
-//      //selectionSort_r(arr, 0, arr.length-1);
-//      insertionSort_r(arr, 0, arr.length - 1);
-//      System.out.println("After:" + Arrays.toString(arr));
-//      System.out.println("There were " + numComparisons + " comparisons and " + numUpdates + " updates.");
-
-      int[] arr;
-      long startTime, endTime;
-      int[] arraySizes = {100, 200, 400, 800, 1600, 3200, 6400};
-      long[] sortTimes = new long[arraySizes.length];
-      long[] r_sortTimes = new long[arraySizes.length];
-
-
-            for(int a = 0; a< arraySizes.length; a++){
-               startTime = System.currentTimeMillis();
-               for (int i = 0; i < 1000; i++)
-               {
-                  arr = randomArray(arraySizes[a]);
-                  insertionSort(arr);
-
-               }
-               endTime = System.currentTimeMillis();
-               sortTimes[a] = endTime - startTime;
-            }
-
-            for(int a = 0; a< arraySizes.length; a++){
-               startTime = System.currentTimeMillis();
-               for (int i = 0; i < 1000; i++)
-               {
-                  arr = randomArray(arraySizes[a]);
-                  insertionSort_r(arr, 0, arr.length - 1);
-
-               }
-               endTime = System.currentTimeMillis();
-
-               r_sortTimes[a] = endTime - startTime;
-            }
-
-            for(int a = 0; a < arraySizes.length; a++){
-               System.out.println(arraySizes[a] + "\t" + sortTimes[a] + "\t" + r_sortTimes[a]);
-            }
+      //int[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+      int[] arr = {5, 9, 1, 10, 3, 8, 2, 4, 7, 6};
+      System.out.println("Before:" + Arrays.toString(arr));
+      //selectionSort_r(arr, 0, arr.length-1);
+      //insertionSort_r(arr, 0, arr.length - 1);
+      shellSort(arr);
+      System.out.println("After:" + Arrays.toString(arr));
+      System.out.println("There were " + numComparisons + " comparisons and " + numUpdates + " updates.");
+//
+//      int[] arr;
+//      long startTime, endTime;
+//      int[] arraySizes = {100, 200, 400, 800, 1600, 3200, 6400};
+//      long[] sortTimes = new long[arraySizes.length];
+//      long[] r_sortTimes = new long[arraySizes.length];
+//
+//
+//            for(int a = 0; a< arraySizes.length; a++){
+//               startTime = System.currentTimeMillis();
+//               for (int i = 0; i < 1000; i++)
+//               {
+//                  arr = randomArray(arraySizes[a]);
+//                  insertionSort(arr);
+//
+//               }
+//               endTime = System.currentTimeMillis();
+//               sortTimes[a] = endTime - startTime;
+//            }
+//
+//            for(int a = 0; a< arraySizes.length; a++){
+//               startTime = System.currentTimeMillis();
+//               for (int i = 0; i < 1000; i++)
+//               {
+//                  arr = randomArray(arraySizes[a]);
+//                  insertionSort_r(arr, 0, arr.length - 1);
+//
+//               }
+//               endTime = System.currentTimeMillis();
+//
+//               r_sortTimes[a] = endTime - startTime;
+//            }
+//
+//            for(int a = 0; a < arraySizes.length; a++){
+//               System.out.println(arraySizes[a] + "\t" + sortTimes[a] + "\t" + r_sortTimes[a]);
+//            }
 
 
 

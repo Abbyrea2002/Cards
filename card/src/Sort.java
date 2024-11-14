@@ -222,12 +222,12 @@ public class Sort
    }
 
    public static void main(String[] args){
-      //int[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-      int[] arr = {5, 9, 1, 10, 3, 8, 2, 4, 7, 6};
-      System.out.println("Before:" + Arrays.toString(arr));
-      mergeSort(arr);
-      System.out.println("After:" + Arrays.toString(arr));
-      System.out.println("There were " + numComparisons + " comparisons and " + numUpdates + " updates.");
+//      //int[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+//      int[] arr = {5, 9, 1, 10, 3, 8, 2, 4, 7, 6};
+//      System.out.println("Before:" + Arrays.toString(arr));
+//      mergeSort(arr);
+//      System.out.println("After:" + Arrays.toString(arr));
+//      System.out.println("There were " + numComparisons + " comparisons and " + numUpdates + " updates.");
 
 //      int[][] arrays = generateRandomArrays(10000, 1000);
 //      int[] gapSeq1 = {5000, 2500, 1250, 625, 312, 156, 78, 39, 19, 9, 4, 1}; // n/2, n/4, n/8, ..., 1
@@ -251,24 +251,24 @@ public class Sort
 //      System.out.println("Gap list is " + Arrays.toString(gapSeq4));
 //      System.out.println("Execution time is: " + time4 + "\n");
 
-//      int[] arr;
-//      long startTime, endTime;
-//      int[] arraySizes = {100, 200, 400, 800, 1600, 3200, 6400};
-//      long[] sortTimes = new long[arraySizes.length];
-//     // long[] r_sortTimes = new long[arraySizes.length];
-//
-//
-//            for(int a = 0; a< arraySizes.length; a++){
-//               startTime = System.currentTimeMillis();
-//               for (int i = 0; i < 1000; i++)
-//               {
-//                  arr = randomArray(arraySizes[a]);
-//                  shellSort(arr);
-//
-//               }
-//               endTime = System.currentTimeMillis();
-//               sortTimes[a] = endTime - startTime;
-//            }
+      int[] arr;
+      long startTime, endTime;
+      int[] arraySizes = {5000, 10000};
+      long[] sortTimes = new long[arraySizes.length];
+     // long[] r_sortTimes = new long[arraySizes.length];
+
+
+            for(int a = 0; a< arraySizes.length; a++){
+               startTime = System.currentTimeMillis();
+               for (int i = 0; i < 1000; i++)
+               {
+                  arr = randomArray(arraySizes[a]);
+                  mergeSort(arr);
+
+               }
+               endTime = System.currentTimeMillis();
+               sortTimes[a] = endTime - startTime;
+            }
 
 //            for(int a = 0; a< arraySizes.length; a++){
 //               startTime = System.currentTimeMillis();
@@ -283,9 +283,9 @@ public class Sort
 //               r_sortTimes[a] = endTime - startTime;
 //            }
 
-//            for(int a = 0; a < arraySizes.length; a++){
-//               System.out.println(arraySizes[a] + "\t" + sortTimes[a]);
-//            }
+            for(int a = 0; a < arraySizes.length; a++){
+               System.out.println(arraySizes[a] + "\t" + sortTimes[a]);
+            }
 
 
 

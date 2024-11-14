@@ -164,6 +164,41 @@ public class Sort
       }
    }
 
+   private static void mergeSort_r(int[] arr,int[] temp, int first, int last){
+      if(first < last){
+         int mid = (first + last) / 2;
+         mergeSort_r(arr, temp, first, mid);
+         mergeSort_r(arr, temp, mid + 1, last);
+         merge(arr, temp, first, mid, last);
+      }
+   }
+
+   public static void mergeSort(int[] arr){
+      int[] temp = new int[arr.length];
+      mergeSort_r(arr, temp, 0, arr.length-1);
+
+
+   }
+
+   private static void merge(int[] arr, int[] temp, int first, int mid, int last){
+      int pos1 = first, pos2 = mid + 1, index = first;
+
+
+      while(pos1 <= mid && pos2 <= last){
+         numComparisons++;
+         if(arr[pos1] <= arr[pos2]) temp[index++] = arr[pos1++];
+         else temp[index++] = arr[pos2++];
+         numUpdates++;
+      }
+      numUpdates++;
+      while(pos1 <= mid) temp[index++] = arr[pos1++];
+      numUpdates++;
+      while(pos2 <= last) temp[index++] = arr[pos2++];
+
+      for(int i = first; i <= last; i++) arr[i] = temp[i];
+      numUpdates += last - first +1;
+   }
+
    private static int[][] generateRandomArrays(int arraySize, int numArrays){
       int[][] arrays = new int[numArrays][arraySize];
       Random random = new Random();
@@ -187,36 +222,34 @@ public class Sort
    }
 
    public static void main(String[] args){
-//      //int[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-//      int[] arr = {5, 9, 1, 10, 3, 8, 2, 4, 7, 6};
-//      System.out.println("Before:" + Arrays.toString(arr));
-//      //selectionSort_r(arr, 0, arr.length-1);
-//      //insertionSort_r(arr, 0, arr.length - 1);
-//      shellSort(arr);
-//      System.out.println("After:" + Arrays.toString(arr));
-//      System.out.println("There were " + numComparisons + " comparisons and " + numUpdates + " updates.");
+      //int[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+      int[] arr = {5, 9, 1, 10, 3, 8, 2, 4, 7, 6};
+      System.out.println("Before:" + Arrays.toString(arr));
+      mergeSort(arr);
+      System.out.println("After:" + Arrays.toString(arr));
+      System.out.println("There were " + numComparisons + " comparisons and " + numUpdates + " updates.");
 
-      int[][] arrays = generateRandomArrays(10000, 1000);
-      int[] gapSeq1 = {5000, 2500, 1250, 625, 312, 156, 78, 39, 19, 9, 4, 1}; // n/2, n/4, n/8, ..., 1
-      int[] gapSeq2 = {3333, 1111, 370, 123, 41, 13, 4, 1}; // n/3, n/6, n/9, ..., 1
-      int[] gapSeq3 = {2500, 625, 156, 39, 9, 1}; // n/4, n/16, n/64, ..., 1
-      int[] gapSeq4 = {3785, 1695, 749, 326, 138, 57, 23, 9, 4, 1}; // Mean of prime numbers sequence
-
-      long time1 = measureTime(arrays, gapSeq1);
-      System.out.println("Gap list is " + Arrays.toString(gapSeq1));
-      System.out.println("Execution time is: " + time1 + "\n");
-
-      long time2 = measureTime(arrays, gapSeq2);
-      System.out.println("Gap list is " + Arrays.toString(gapSeq2));
-      System.out.println("Execution time is: " + time2 + "\n");
-
-      long time3 = measureTime(arrays, gapSeq3);
-      System.out.println("Gap list is " + Arrays.toString(gapSeq3));
-      System.out.println("Execution time is: " + time3 + "\n");
-
-      long time4 = measureTime(arrays, gapSeq4);
-      System.out.println("Gap list is " + Arrays.toString(gapSeq4));
-      System.out.println("Execution time is: " + time4 + "\n");
+//      int[][] arrays = generateRandomArrays(10000, 1000);
+//      int[] gapSeq1 = {5000, 2500, 1250, 625, 312, 156, 78, 39, 19, 9, 4, 1}; // n/2, n/4, n/8, ..., 1
+//      int[] gapSeq2 = {3333, 1111, 370, 123, 41, 13, 4, 1}; // n/3, n/6, n/9, ..., 1
+//      int[] gapSeq3 = {2500, 625, 156, 39, 9, 1}; // n/4, n/16, n/64, ..., 1
+//      int[] gapSeq4 = {3785, 1695, 749, 326, 138, 57, 23, 9, 4, 1}; // Mean of prime numbers sequence
+//
+//      long time1 = measureTime(arrays, gapSeq1);
+//      System.out.println("Gap list is " + Arrays.toString(gapSeq1));
+//      System.out.println("Execution time is: " + time1 + "\n");
+//
+//      long time2 = measureTime(arrays, gapSeq2);
+//      System.out.println("Gap list is " + Arrays.toString(gapSeq2));
+//      System.out.println("Execution time is: " + time2 + "\n");
+//
+//      long time3 = measureTime(arrays, gapSeq3);
+//      System.out.println("Gap list is " + Arrays.toString(gapSeq3));
+//      System.out.println("Execution time is: " + time3 + "\n");
+//
+//      long time4 = measureTime(arrays, gapSeq4);
+//      System.out.println("Gap list is " + Arrays.toString(gapSeq4));
+//      System.out.println("Execution time is: " + time4 + "\n");
 
 //      int[] arr;
 //      long startTime, endTime;

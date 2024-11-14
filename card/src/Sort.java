@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -34,7 +35,6 @@ public class Sort
    public static int[] randomArray(int n){
       Random rand = new Random();
       int[] arr = new int[n];
-
       for(int i = 0; i<n; i++){
          arr[i] = rand.nextInt(100);
       }
@@ -128,41 +128,101 @@ public class Sort
 
    }
 
+
    private static void shellSort(int[] arr){
       int temp, index;
 
       for(int gap = arr.length / 2; gap>0; gap/=2){
-         System.out.println("\nGap is " + gap);
+        // System.out.println("\nGap is " + gap);
          for(int i = gap; i<arr.length; i++){
             temp = arr[i];
             numComparisons++;
-            for(index = i; index >+ gap && arr[index - gap] > temp;index -= gap){
+            for(index = i; index >= gap && arr[index - gap] > temp;index -= gap){
                arr[index] = arr[index - gap];
                numUpdates++;
                numComparisons++;
             }
             arr[index] = temp;
             numUpdates++;
-            System.out.println("Pass:" + Arrays.toString(arr));
+            //System.out.println("Pass:" + Arrays.toString(arr));
          }
       }
 
    }
+
+   private static void shellShort2(int[] arr, int[]gaps){
+      for (int gap : gaps) {
+         for (int i = gap; i < arr.length; i++) {
+            int temp = arr[i];
+            int j = i;
+            while (j >= gap && arr[j - gap] > temp) {
+               arr[j] = arr[j - gap];
+               j -= gap;
+            }
+            arr[j] = temp;
+         }
+      }
+   }
+
+   private static int[][] generateRandomArrays(int arraySize, int numArrays){
+      int[][] arrays = new int[numArrays][arraySize];
+      Random random = new Random();
+
+      for (int i = 0; i < numArrays; i++) {
+         for (int j = 0; j < arraySize; j++) {
+            arrays[i][j] = random.nextInt(); // Fill with random integers
+         }
+      }
+      return arrays;
+   }
+
+   private static long measureTime(int[][] arrays, int[] gaps){
+      long startTime = System.currentTimeMillis();
+      for(int[] array : arrays){
+         int[] arrayCopy = Arrays.copyOf(array, array.length);
+         shellShort2(arrayCopy, gaps);
+      }
+      long endTime = System.currentTimeMillis();
+      return endTime - startTime;
+   }
+
    public static void main(String[] args){
-      //int[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-      int[] arr = {5, 9, 1, 10, 3, 8, 2, 4, 7, 6};
-      System.out.println("Before:" + Arrays.toString(arr));
-      //selectionSort_r(arr, 0, arr.length-1);
-      //insertionSort_r(arr, 0, arr.length - 1);
-      shellSort(arr);
-      System.out.println("After:" + Arrays.toString(arr));
-      System.out.println("There were " + numComparisons + " comparisons and " + numUpdates + " updates.");
-//
+//      //int[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+//      int[] arr = {5, 9, 1, 10, 3, 8, 2, 4, 7, 6};
+//      System.out.println("Before:" + Arrays.toString(arr));
+//      //selectionSort_r(arr, 0, arr.length-1);
+//      //insertionSort_r(arr, 0, arr.length - 1);
+//      shellSort(arr);
+//      System.out.println("After:" + Arrays.toString(arr));
+//      System.out.println("There were " + numComparisons + " comparisons and " + numUpdates + " updates.");
+
+      int[][] arrays = generateRandomArrays(10000, 1000);
+      int[] gapSeq1 = {5000, 2500, 1250, 625, 312, 156, 78, 39, 19, 9, 4, 1}; // n/2, n/4, n/8, ..., 1
+      int[] gapSeq2 = {3333, 1111, 370, 123, 41, 13, 4, 1}; // n/3, n/6, n/9, ..., 1
+      int[] gapSeq3 = {2500, 625, 156, 39, 9, 1}; // n/4, n/16, n/64, ..., 1
+      int[] gapSeq4 = {3785, 1695, 749, 326, 138, 57, 23, 9, 4, 1}; // Mean of prime numbers sequence
+
+      long time1 = measureTime(arrays, gapSeq1);
+      System.out.println("Gap list is " + Arrays.toString(gapSeq1));
+      System.out.println("Execution time is: " + time1 + "\n");
+
+      long time2 = measureTime(arrays, gapSeq2);
+      System.out.println("Gap list is " + Arrays.toString(gapSeq2));
+      System.out.println("Execution time is: " + time2 + "\n");
+
+      long time3 = measureTime(arrays, gapSeq3);
+      System.out.println("Gap list is " + Arrays.toString(gapSeq3));
+      System.out.println("Execution time is: " + time3 + "\n");
+
+      long time4 = measureTime(arrays, gapSeq4);
+      System.out.println("Gap list is " + Arrays.toString(gapSeq4));
+      System.out.println("Execution time is: " + time4 + "\n");
+
 //      int[] arr;
 //      long startTime, endTime;
 //      int[] arraySizes = {100, 200, 400, 800, 1600, 3200, 6400};
 //      long[] sortTimes = new long[arraySizes.length];
-//      long[] r_sortTimes = new long[arraySizes.length];
+//     // long[] r_sortTimes = new long[arraySizes.length];
 //
 //
 //            for(int a = 0; a< arraySizes.length; a++){
@@ -170,13 +230,13 @@ public class Sort
 //               for (int i = 0; i < 1000; i++)
 //               {
 //                  arr = randomArray(arraySizes[a]);
-//                  insertionSort(arr);
+//                  shellSort(arr);
 //
 //               }
 //               endTime = System.currentTimeMillis();
 //               sortTimes[a] = endTime - startTime;
 //            }
-//
+
 //            for(int a = 0; a< arraySizes.length; a++){
 //               startTime = System.currentTimeMillis();
 //               for (int i = 0; i < 1000; i++)
@@ -189,9 +249,9 @@ public class Sort
 //
 //               r_sortTimes[a] = endTime - startTime;
 //            }
-//
+
 //            for(int a = 0; a < arraySizes.length; a++){
-//               System.out.println(arraySizes[a] + "\t" + sortTimes[a] + "\t" + r_sortTimes[a]);
+//               System.out.println(arraySizes[a] + "\t" + sortTimes[a]);
 //            }
 
 
@@ -226,5 +286,6 @@ public class Sort
 //         }
 //         System.out.printf("%d\t\t%d\t\t\t%d\n", arraySize, iterativeTime, recursiveTime);
      // }
+
    }
 }//class

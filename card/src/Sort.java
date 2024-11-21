@@ -129,7 +129,7 @@ public class Sort
    }
 
 
-   private static void shellSort(int[] arr){
+   public static void shellSort(int[] arr){
       int temp, index;
 
       for(int gap = arr.length / 2; gap>0; gap/=2){
@@ -150,7 +150,7 @@ public class Sort
 
    }
 
-   private static void shellShort2(int[] arr, int[]gaps){
+   public static void shellShort2(int[] arr, int[]gaps){
       for (int gap : gaps) {
          for (int i = gap; i < arr.length; i++) {
             int temp = arr[i];
@@ -265,12 +265,12 @@ public class Sort
    }
 
    public static void main(String[] args){
-      //int[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-      int[] arr = {5, 9, 1, 10, 3, 8, 2, 4, 7, 6};
-      System.out.println("Before:" + Arrays.toString(arr));
-      quickSort(arr);
-      System.out.println("After:" + Arrays.toString(arr));
-      System.out.println("There were " + numComparisons + " comparisons and " + numUpdates + " updates.");
+//      //int[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+//      int[] arr = {5, 9, 1, 10, 3, 8, 2, 4, 7, 6};
+//      System.out.println("Before:" + Arrays.toString(arr));
+//      quickSort(arr);
+//      System.out.println("After:" + Arrays.toString(arr));
+//      System.out.println("There were " + numComparisons + " comparisons and " + numUpdates + " updates.");
 
 //      int[][] arrays = generateRandomArrays(10000, 1000);
 //      int[] gapSeq1 = {5000, 2500, 1250, 625, 312, 156, 78, 39, 19, 9, 4, 1}; // n/2, n/4, n/8, ..., 1
@@ -293,7 +293,7 @@ public class Sort
 //      long time4 = measureTime(arrays, gapSeq4);
 //      System.out.println("Gap list is " + Arrays.toString(gapSeq4));
 //      System.out.println("Execution time is: " + time4 + "\n");
-
+//
 //      int[] arr;
 //      long startTime, endTime;
 //      int[] arraySizes = {5000, 10000};
@@ -334,34 +334,34 @@ public class Sort
 
 
 
-//      int[] arraySizes = {100, 200, 400, 800, 1600, 3200, 6400};
-//
-//
-//
-//      for (int arraySize : arraySizes)
-//      {
-//         long iterativeTime = 0;
-//         long recursiveTime = 0;
-//
-//         for (int i = 0; i < 1000; i++)
-//         {
-            //int[] arr = randomArray(arraySize);
-//            int[] arrCopy = Arrays.copyOf(arr, arr.length);
+      int[] arraySizes = {100, 200, 400, 800, 1600, 3200, 6400};
 
-            // Measure iterative selection sort time
-//            long startTime = System.currentTimeMillis();
-//            selectionSort(arr);
-//            long endTime = System.currentTimeMillis();
-//            iterativeTime += (endTime - startTime);
-//
-//            // Measure recursive selection sort time
-//            startTime = System.currentTimeMillis();
-//            selectionSort_r(arrCopy, 0, arrCopy.length - 1);
-//            endTime = System.currentTimeMillis();
-//            recursiveTime += (endTime - startTime);
-//         }
-//         System.out.printf("%d\t\t%d\t\t\t%d\n", arraySize, iterativeTime, recursiveTime);
-     // }
+
+
+      for (int arraySize : arraySizes)
+      {
+         long iterativeTime = 0;
+         long recursiveTime = 0;
+
+         for (int i = 0; i < 1000; i++)
+         {
+            int[] arr = randomArray(arraySize);
+            int[] arrCopy = Arrays.copyOf(arr, arr.length);
+
+
+            long startTime = System.currentTimeMillis();
+            selectionSort(arr);
+            long endTime = System.currentTimeMillis();
+            iterativeTime += (endTime - startTime);
+
+            // Measure recursive selection sort time
+            startTime = System.currentTimeMillis();
+            selectionSort_r(arrCopy, 0, arrCopy.length - 1);
+            endTime = System.currentTimeMillis();
+            recursiveTime += (endTime - startTime);
+         }
+         System.out.printf("%d\t\t%d\t\t\t%d\n", arraySize, iterativeTime, recursiveTime);
+      }
 
    }
 }//class

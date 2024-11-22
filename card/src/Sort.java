@@ -220,6 +220,33 @@ public class Sort
    }
 
    public static void quickSort_r(int[] arr, int first, int last){
+
+      int middle = (first + last) / 2;
+      orderThree(arr, first, middle, last);
+      swap(arr, middle, last);
+      int pivot = arr[last];
+      int indexFromLeft = first, indexFromRight = last;
+
+      while(indexFromLeft <= indexFromRight){
+         numComparisons++;
+         while(arr[indexFromLeft] < pivot){ indexFromLeft++; numComparisons++;}
+         numComparisons++;
+         while (arr[indexFromRight] > pivot){ indexFromRight--; numComparisons++;}
+         if(indexFromLeft <= indexFromRight) swap(arr, indexFromLeft++, indexFromRight--);
+
+
+      }
+
+      if(first < indexFromRight) quickSort_r(arr, first, indexFromRight);
+      if(indexFromLeft < last) quickSort_r(arr, indexFromLeft, last);
+   }
+
+   public static void quickSortWithInsertion(int[] arr, int first, int last){
+
+      if(last - first + 1 <= 100){
+         insertionSort_r(arr, first, last);
+         return;
+      }
       int middle = (first + last) / 2;
       orderThree(arr, first, middle, last);
       swap(arr, middle, last);
@@ -350,16 +377,17 @@ public class Sort
 
 
             long startTime = System.currentTimeMillis();
-            selectionSort(arr);
+            quickSort(arr);
             long endTime = System.currentTimeMillis();
             iterativeTime += (endTime - startTime);
 
             // Measure recursive selection sort time
             startTime = System.currentTimeMillis();
-            selectionSort_r(arrCopy, 0, arrCopy.length - 1);
+            quickSort_r(arr, 0, arr.length - 1);
             endTime = System.currentTimeMillis();
             recursiveTime += (endTime - startTime);
          }
+
          System.out.printf("%d\t\t%d\t\t\t%d\n", arraySize, iterativeTime, recursiveTime);
       }
 

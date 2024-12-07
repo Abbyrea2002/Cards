@@ -40,7 +40,7 @@ public class Card implements Comparable<Card>
 
    //public String getColour(){
      // return COLOURS[COLOUR];
-   //}
+   //fde QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ0-----PO0}
 
    public int getRankValue(){
       return RANK;
@@ -61,5 +61,13 @@ public class Card implements Comparable<Card>
       if(this.getRankValue() > otherCard.getRankValue()) return 1;
       else if(this.getRankValue() < otherCard.getRankValue()) return -1;
       else return 0;
+   }
+   @Override
+   public boolean equals(Object obj) {
+      if (this == obj) return true; // Same reference
+      if (obj == null || getClass() != obj.getClass()) return false; // Type check
+
+      Card otherCard = (Card) obj; // Cast the object to Card
+      return this.getSuit().equals(otherCard.getSuit()) && this.getRank().equals(otherCard.getRank());
    }
 }//class

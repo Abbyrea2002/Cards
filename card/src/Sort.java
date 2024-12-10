@@ -328,17 +328,7 @@ public class Sort
 //     // long[] r_sortTimes = new long[arraySizes.length];
 //
 //
-//            for(int a = 0; a< arraySizes.length; a++){
-//               startTime = System.currentTimeMillis();
-//               for (int i = 0; i < 1000; i++)
-//               {
-//                  arr = randomArray(arraySizes[a]);
-//                  mergeSort(arr);
-//
-//               }
-//               endTime = System.currentTimeMillis();
-//               sortTimes[a] = endTime - startTime;
-//            }
+
 //
 ////            for(int a = 0; a< arraySizes.length; a++){
 ////               startTime = System.currentTimeMillis();
